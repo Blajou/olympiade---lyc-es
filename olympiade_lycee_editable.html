@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Olympiade du lycée - Sondage</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f6fb;
+      color: #172033;
+    }
+    header {
+      background: linear-gradient(135deg, #3157d5, #6c4fe8);
+      color: white;
+      padding: 45px 20px;
+      text-align: center;
+    }
+    header h1 { margin: 0 0 10px; font-size: 2.2rem; }
+    header p { margin: 0; opacity: .9; }
+    main {
+      width: min(900px, calc(100% - 30px));
+      margin: 30px auto 50px;
+    }
+    .card {
+      background: white;
+      border-radius: 18px;
+      padding: 28px;
+      margin-bottom: 22px;
+      box-shadow: 0 8px 25px rgba(20, 30, 60, .08);
+    }
+    h2 { margin-top: 0; }
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+    label {
+      display: block;
+      font-weight: 700;
+      margin-bottom: 7px;
+    }
+    input, select {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #ccd2df;
+      border-radius: 10px;
+      font-size: 1rem;
+    }
+    .choices {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+    .choice {
+      border: 1px solid #d7dbe5;
+      border-radius: 11px;
+      padding: 12px;
+      cursor: pointer;
+      background: #fafbfe;
+    }
+    .choice:hover { border-color: #3157d5; }
+    .choice input { width: auto; margin-right: 8px; }
+    button {
+      border: 0;
+      border-radius: 11px;
+      padding: 14px 20px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .primary { background: #3157d5; color: white; width: 100%; }
+    .primary:hover { background: #2648b9; }
+    .secondary { background: #e9edfa; color: #2444a5; margin-top: 10px; }
+    .success {
+      display: none;
+      margin-top: 15px;
+      padding: 13px;
+      border-radius: 10px;
+      background: #e7f7ed;
+      color: #176b39;
+      font-weight: 700;
+    }
+    .admin {
+      border-left: 5px solid #6c4fe8;
+    }
+    .admin code {
+      background: #f0f2f8;
+      padding: 2px 5px;
+      border-radius: 4px;
+    }
+    footer { text-align: center; color: #6d7485; padding: 20px; }
+    @media (max-width: 650px) {
+      .grid, .choices { grid-template-columns: 1fr; }
+      header h1 { font-size: 1.8rem; }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>🏆 Olympiade du lycée</h1>
+    <p>Réservée aux classes de Terminale</p>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>📋 Sondage de participation</h2>
+      <p>Merci de remplir ce formulaire pour indiquer votre participation et choisir votre sport.</p>
+
+      <form id="surveyForm">
+        <div class="grid">
+          <div>
+            <label for="nom">Nom</label>
+            <input id="nom" name="nom" required placeholder="Votre nom">
+          </div>
+          <div>
+            <label for="prenom">Prénom</label>
+            <input id="prenom" name="prenom" required placeholder="Votre prénom">
+          </div>
+          <div>
+            <label for="classe">Classe</label>
+            <select id="classe" name="classe" required>
+              <option value="">-- Choisir --</option>
+              <option>TAGO 1</option>
+              <option>TAGO 2</option>
+              <option>TMSC</option>
+              <option>TMMV</option>
+              <option>TPL</option>
+              <option>T. outilleur</option>
+            </select>
+          </div>
+          <div>
+            <label for="date">Date</label>
+            <input id="date" name="date" type="date" required>
+          </div>
+        </div>
+
+        <br>
+
+        <label>Participation</label>
+        <div class="choices">
+          <label class="choice">
+            <input type="radio" name="participation" value="Oui" required> Oui, je participe
+          </label>
+          <label class="choice">
+            <input type="radio" name="participation" value="Non"> Non, je ne participe pas
+          </label>
+        </div>
+
+        <br>
+
+        <label>Sport choisi</label>
+        <div class="choices">
+          <label class="choice"><input type="radio" name="sport" value="Volley-ball" required> 🏐 Volley-ball</label>
+          <label class="choice"><input type="radio" name="sport" value="Football"> ⚽ Football</label>
+          <label class="choice"><input type="radio" name="sport" value="Basketball"> 🏀 Basketball</label>
+          <label class="choice"><input type="radio" name="sport" value="Lancer de javelot"> 🏃 Lancer de javelot</label>
+          <label class="choice"><input type="radio" name="sport" value="Balle aux prisonniers"> 🎯 Balle aux prisonniers</label>
+          <label class="choice"><input type="radio" name="sport" value="Tennis de table"> 🏓 Tennis de table</label>
+        </div>
+
+        <br>
+        <button class="primary" type="submit">Envoyer ma réponse</button>
+        <div id="success" class="success">✅ Réponse enregistrée sur cet appareil !</div>
+      </form>
+    </section>
+
+    <section class="card admin">
+      <h2>✏️ Partie facile à modifier</h2>
+      <p>
+        Tu peux modifier directement le fichier avec un éditeur de texte (Bloc-notes, VS Code, etc.).
+        Les listes de classes et de sports sont écrites dans le HTML.
+      </p>
+      <p>
+        Cherche par exemple <code>TAGO 1</code> ou <code>Volley-ball</code> dans le fichier pour
+        changer les choix.
+      </p>
+      <button class="secondary" onclick="exportResponses()">📥 Exporter les réponses en CSV</button>
+    </section>
+  </main>
+
+  <footer>Olympiade du lycée • Sondage Terminale</footer>
+
+  <script>
+    const form = document.getElementById("surveyForm");
+    const success = document.getElementById("success");
+
+    form.addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const data = Object.fromEntries(new FormData(form).entries());
+      const responses = JSON.parse(localStorage.getItem("olympiadeResponses") || "[]");
+      responses.push({
+        date_enregistrement: new Date().toLocaleString("fr-FR"),
+        ...data
+      });
+      localStorage.setItem("olympiadeResponses", JSON.stringify(responses));
+
+      success.style.display = "block";
+      form.reset();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    function exportResponses() {
+      const responses = JSON.parse(localStorage.getItem("olympiadeResponses") || "[]");
+
+      if (!responses.length) {
+        alert("Aucune réponse enregistrée sur cet appareil.");
+        return;
+      }
+
+      const headers = Object.keys(responses[0]);
+      const rows = responses.map(row =>
+        headers.map(header => `"${String(row[header] ?? "").replaceAll('"', '""')}"`).join(";")
+      );
+
+      const csv = "\uFEFF" + headers.join(";") + "\n" + rows.join("\n");
+      const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "reponses_olympiade.csv";
+      link.click();
+      URL.revokeObjectURL(url);
+    }
+  </script>
+</body>
+</html>
